@@ -1,0 +1,71 @@
+plugins {
+    id 'java-gradle-plugin'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+def assertjVersion = "3.20.2"
+def junit5Version = '5.7.2'
+
+dependencies {
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: assertjVersion
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: junit5Version
+
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junit5Version
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junit5Version
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junit5Version
+    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: junit5Version
+
+}
+
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        greeting {
+            id = 'plugin.echofileplugin'
+            implementationClass = 'plugin.GradlePluginNoSrcDepsPlugin'
+        }
+    }
+}
+
+// Add a source set for the functional test suite
+sourceSets {
+    functionalTest {
+    }
+}
+
+gradlePlugin.testSourceSets(sourceSets.functionalTest)
+configurations.functionalTestImplementation.extendsFrom(configurations.testImplementation)
+
+// Add a task to run the functional tests
+tasks.register('functionalTest', Test) {
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
+    classpath = sourceSets.functionalTest.runtimeClasspath
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+        testLogging {
+            events 'skipped', 'passed', 'failed'
+        }
+
+    }
+}
+
+tasks.named('check') {
+    // Run the functional tests as part of `check`
+    dependsOn(tasks.functionalTest)
+}
+
+tasks.named('test') {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+        testLogging {
+            events 'skipped', 'passed', 'failed'
+        }
+
+    }
+}
+
