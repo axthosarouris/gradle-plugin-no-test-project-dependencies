@@ -1,9 +1,7 @@
 package plugin;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
-import java.util.Optional;
 import javax.inject.Inject;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
@@ -25,8 +23,4 @@ public abstract class EchoFileTask extends DefaultTask {
         Project project = this.getProject();
         new EchoFile(project, Path.of(getFilePath().get())).performAction();
     }
-
-
-
-
 }
