@@ -33,7 +33,7 @@ class GradlePluginNoSrcDepsPluginTest {
     private Project createProjectWithPlugin() {
 
         Project project = ProjectBuilder.builder().build();
-        project.getPlugins().apply("plugin.echofile");
+        project.getPlugins().apply("plugin.echofileplugin");
         return project;
     }
 
