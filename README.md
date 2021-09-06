@@ -1,7 +1,7 @@
 ## Gradle plugin demo where the functional tests have no access to the plugin or the testing project classpath
 
 ### Functionality description:
-This plugin accepts a configuration of the form and echoes the contents of the file in the Standard 
+This plugin accepts a configuration of the following form and echoes the contents of the file in the Standard 
 output.
 ```groovy
 echofiletask{
