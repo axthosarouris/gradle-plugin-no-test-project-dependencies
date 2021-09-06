@@ -18,15 +18,11 @@ public abstract class EchoFileTask extends DefaultTask {
     }
 
     @Input
-    @org.gradle.api.tasks.Optional
-    public abstract Property<String> getProjectName();
-
-    @Input
     public abstract Property<String> getFilePath();
 
     @TaskAction
     public void taskAction() throws FileNotFoundException {
-        Project project = new ProjectLocator(getProjectName().getOrNull(),this.getProject()).locateProject();
+        Project project = this.getProject();
         new EchoFile(project, Path.of(getFilePath().get())).performAction();
     }
 
