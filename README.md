@@ -1,4 +1,4 @@
-## Gradle plugin demo where the functional tests have no access to the plugin src code or the testing project src code.
+## Gradle plugin demo where the functional tests have no access to the plugin or the testing project classpath
 
 ### Functionality description:
 This plugin accepts a configuration of the form and echoes the contents of the file in the Standard 
