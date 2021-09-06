@@ -31,36 +31,10 @@ class GradlePluginNoSrcDepsPluginTest {
 
 
     private Project createProjectWithPlugin() {
-
         Project project = ProjectBuilder.builder().build();
         project.getPlugins().apply("plugin.echofileplugin");
         return project;
     }
 
-//    private Project createProjectWithSampleBuildFile() throws IOException {
-//        File projectDir= new File(randomFilename()).getAbsoluteFile();
-//        Files.createDirectories(Path.of(projectDir.getAbsolutePath()));
-//        writeString(createEmptyBuildGradleFile(projectDir), stringFromResources(Path.of(SAMPLE_GRADLE_FILE)));
-//        writeString(createEmptySettingsGradeFile(projectDir), stringFromResources(Path.of(SAMPLE_SETTINGS_FILE)));
-//
-//        return ProjectBuilder.builder().withProjectDir(projectDir).build();
-//    }
-//
-//    private File createEmptySettingsGradeFile(File projectDir) {
-//        return new File(projectDir, "settings.gradle");
-//    }
-//
-//    private File createEmptyBuildGradleFile(File projectDir) {
-//        return new File(projectDir, "build.gradle");
-//    }
-//
-//    private String randomFilename() {
-//        return "randomFile"+new Random().nextInt(10_000);
-//    }
-//
-//    private void writeString(File file, String string) throws IOException {
-//        try (Writer writer = new FileWriter(file)) {
-//            writer.write(string);
-//        }
-//    }
+
 }

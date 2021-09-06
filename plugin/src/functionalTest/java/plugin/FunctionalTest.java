@@ -42,21 +42,13 @@ public class FunctionalTest {
         result = runPluginTask(projectFolder);
     }
 
-    private BuildResult runPluginTask(File projectFolder) {
-        return GradleRunner.create()
-            .withProjectDir(projectFolder)
-            .withPluginClasspath()
-            .withArguments(TASK_NAME)
-            .build();
+    public BuildResult getResult() {
+        return result;
     }
 
     @AfterEach
     public void cleanup() {
         cleanTempFolders();
-    }
-
-    public BuildResult getResult() {
-        return result;
     }
 
     protected String getExpectedContent() {
@@ -75,6 +67,15 @@ public class FunctionalTest {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
+    }
+
+    private BuildResult runPluginTask(File projectFolder) {
+        return GradleRunner.create()
+            .withProjectDir(projectFolder)
+            .withPluginClasspath()
+            .withArguments(TASK_NAME)
+            .withDebug(true)
+            .build();
     }
 
     private void injectFileToBeEchoed(File projectFolder) throws IOException {
